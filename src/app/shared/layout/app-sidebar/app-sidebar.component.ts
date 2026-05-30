@@ -33,6 +33,21 @@ export class AppSidebarComponent {
       name: "Dashboard",
       path: "/"
     },
+    {
+      name: "Especies",
+      path: "/species",
+      icon: `<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2ZM11.9999 4C16.4183 4.00001 19.9999 7.58163 19.9999 12C19.9999 16.4184 16.4183 20.0001 11.9999 20C7.58154 20.0001 3.99988 16.4184 3.99988 12C3.99988 7.58163 7.58154 4.00001 11.9999 4ZM10.0001 10C10.5523 10 11.0001 10.4477 11.0001 11V13C11.0001 13.5523 10.5523 14 10.0001 14C9.44787 14 -0.00012207e-05 13.5523 -0.00012207e-05 13V11C-0.00012207e-05 10.4477 -0.00012207e-05 10 -0.00012207e-05 10C-0.00012207e-05 9.44772 -0.00012207e-05 -5.96046e-08 -0.00012207e-05 -5.96046e-08C-0.00012207e-05 -6.51269e-08 -0.00012207e-05 -7.10543e-08 -0.00012207e-05 -7.65866e-08C-0.00012207e-05 -8.21189 -0.00012207e-05 -8.80463e-08 -0.00012207e-05 -9.35786e-08C-0.00012207e-05 -9.91109e-08 -0.00012207e-05 -1.05082e-07 -0.00012207e-05 -1.11035e-07C-0.00012207e-05 -1.16988e-07 -0.00012207e-05 -1.22941e-07 -0.00012207e-05 -1.28894e-07C-0.00012207e-05 -1.34847e-07 -0.00012207e-05 -1.408  -0.00012207e-05 -1.46753C-0.00012207e-05 -1.52706 9.44787 9.44772 10.0001 9.44772Z" fill="currentColor"></path></svg>`,
+    },
+    {
+      name: "Combates",
+      path: "/battles",
+      icon: `<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.5 2L20 7.5L7.5 20H2V14.5L14.5 2Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 5L19 8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M2 14.5L9.5 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>`,
+    },
+    {
+      name: "Ranking",
+      path: "/battle-statistics/ranking",
+      icon: `<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 3V21H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 14L11 10L15 14L21 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+    }
   ];
   // Others nav items
   othersItems: NavItem[] = [
