@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { EcommerceComponent } from './pages/dashboard/ecommerce/ecommerce.component';
+import { OverviewComponent } from './pages/dashboard/overview/overview.component';
 import { AppLayoutComponent } from './shared/layout/app-layout/app-layout.component';
 
 export const routes: Routes = [
@@ -9,10 +9,9 @@ export const routes: Routes = [
     children:[
       {
         path: '',
-        component: EcommerceComponent,
+        component: OverviewComponent,
         pathMatch: 'full',
-        title:
-          'Dashboard',
+        title: 'Dashboard',
       },
       {
         path: 'species',
