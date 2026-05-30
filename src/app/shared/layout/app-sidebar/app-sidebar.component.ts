@@ -42,6 +42,11 @@ export class AppSidebarComponent {
       name: "Combates",
       path: "/battles",
       icon: `<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.5 2L20 7.5L7.5 20H2V14.5L14.5 2Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 5L19 8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M2 14.5L9.5 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>`,
+    },
+    {
+      name: "Ranking",
+      path: "/battle-statistics/ranking",
+      icon: `<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 3V21H21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M7 14L11 10L15 14L21 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
     }
   ];
   // Others nav items

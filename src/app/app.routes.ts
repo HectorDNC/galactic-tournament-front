@@ -25,6 +25,12 @@ export const routes: Routes = [
         loadChildren: () =>
           import('./modules/battle/battle.module').then((m) => m.BattleModule),
         title: 'Combates',
+      },
+      {
+        path: 'battle-statistics',
+        loadChildren: () =>
+          import('./modules/battle-statistics/battle-statistics.module').then((m) => m.BattleStatisticsModule),
+        title: 'Battle Statistics',
       }
     ]
   },
