@@ -21,8 +21,6 @@ export class AppHeaderComponent {
   isApplicationMenuOpen = false;
   readonly isMobileOpen$;
 
-  @ViewChild('searchInput') searchInput!: ElementRef<HTMLInputElement>;
-
   constructor(public sidebarService: SidebarService) {
     this.isMobileOpen$ = this.sidebarService.isMobileOpen$;
   }
@@ -39,18 +37,4 @@ export class AppHeaderComponent {
     this.isApplicationMenuOpen = !this.isApplicationMenuOpen;
   }
 
-  ngAfterViewInit() {
-    document.addEventListener('keydown', this.handleKeyDown);
-  }
-
-  ngOnDestroy() {
-    document.removeEventListener('keydown', this.handleKeyDown);
-  }
-
-  handleKeyDown = (event: KeyboardEvent) => {
-    if ((event.metaKey || event.ctrlKey) && event.key === 'k') {
-      event.preventDefault();
-      this.searchInput?.nativeElement.focus();
-    }
-  };
 }
