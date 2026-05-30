@@ -1,7 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { MatSort, MatSortModule } from '@angular/material/sort';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatSort } from '@angular/material/sort';
 import { Specie } from '../../models/specie';
 import { SpeciesService } from '../../services/species.service';
 
@@ -11,15 +10,23 @@ import { SpeciesService } from '../../services/species.service';
   templateUrl: './species.component.html',
   styleUrls: ['./species.component.css'],
 })
-export class SpeciesComponent implements OnInit {
+export class SpeciesComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['name', 'powerLevel', 'specialAbility', 'createdAt'];
   dataSource = new MatTableDataSource<Specie>([]);
+
+  totalPages = 1;
+  currentPage = 1;
+  pageSize = 10;
   loading = false;
   error: string | null = null;
 
   @ViewChild('tbSort') tbSort!: MatSort;
 
   constructor(private speciesService: SpeciesService) {}
+
+  get pagesArray(): number[] {
+    return Array.from({ length: this.totalPages }, (_, i) => i + 1);
+  }
 
   ngOnInit(): void {
     this.loadSpecies();
@@ -32,9 +39,11 @@ export class SpeciesComponent implements OnInit {
   loadSpecies(): void {
     this.loading = true;
     this.error = null;
-    this.speciesService.getAll().subscribe({
+    
+    this.speciesService.findAll(this.currentPage - 1, this.pageSize).subscribe({
       next: (data) => {
-        this.dataSource.data = data;
+        this.dataSource.data = data.content;
+        this.totalPages = data.totalPages;
         this.loading = false;
       },
       error: () => {
@@ -42,5 +51,11 @@ export class SpeciesComponent implements OnInit {
         this.loading = false;
       },
     });
+  }
+
+  goToPage(page: number): void {
+    if (page < 1 || page > this.totalPages) return;
+    this.currentPage = page;
+    this.loadSpecies();
   }
 }

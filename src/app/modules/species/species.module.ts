@@ -6,16 +6,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
 
-
-
 @NgModule({
   declarations: [SpeciesComponent],
   imports: [
     CommonModule,
     SpeciesRoutingModule,
     MatButtonModule,
-    MatTableModule,
     MatSortModule,
+    MatTableModule,
   ],
   exports: [SpeciesRoutingModule]
 })

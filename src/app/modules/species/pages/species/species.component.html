@@ -5,30 +5,31 @@
 
     <div class="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-white/[0.05] dark:bg-white/[0.03]">
         <div class="max-w-full overflow-x-auto">
-            <table
-                mat-table
+            <div class="max-w-full overflow-x-auto px-3 sm:px-5">
+                <table
+                    mat-table
                 [dataSource]="dataSource"
                 class="min-w-full"
                 matSort
                 #tbSort="matSort"
             >
                 <ng-container matColumnDef="name">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="px-5 py-3 font-normal text-gray-500 text-start text-theme-sm dark:text-gray-400">Nombre</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="px-5 py-3 font-normal text-gray-600 text-start text-theme-sm dark:text-gray-400">Nombre</th>
                     <td mat-cell *matCellDef="let element" class="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">{{ element.name }}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="powerLevel">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="px-5 py-3 font-normal text-gray-500 text-start text-theme-sm dark:text-gray-400">Nivel de poder</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="px-5 py-3 font-normal text-gray-600 text-start text-theme-sm dark:text-gray-400">Nivel de poder</th>
                     <td mat-cell *matCellDef="let element" class="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">{{ element.powerLevel }}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="specialAbility">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="px-5 py-3 font-normal text-gray-500 text-start text-theme-sm dark:text-gray-400">Habilidad especial</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="px-5 py-3 font-normal text-gray-600 text-start text-theme-sm dark:text-gray-400">Habilidad especial</th>
                     <td mat-cell *matCellDef="let element" class="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">{{ element.specialAbility }}</td>
                 </ng-container>
 
                 <ng-container matColumnDef="createdAt">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="px-5 py-3 font-normal text-gray-500 text-start text-theme-sm dark:text-gray-400">Fecha de creación</th>
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="px-5 py-3 font-normal text-gray-600 text-start text-theme-sm dark:text-gray-400">Fecha de creación</th>
                     <td mat-cell *matCellDef="let element" class="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">{{ element.createdAt | date: 'dd/MM/yyyy' }}</td>
                 </ng-container>
 
@@ -49,6 +50,59 @@
                 <tr mat-header-row *matHeaderRowDef="displayedColumns" class="border-b border-gray-100 dark:border-white/[0.05]"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns" class="border-b border-gray-100 dark:border-white/[0.05]"></tr>
             </table>
+
+            <!-- Paginación -->
+            <div class="border-t border-gray-100 px-6 py-4 dark:border-white/[0.05]">
+                <div class="flex items-center justify-between">
+                    <!-- Botón Anterior -->
+                    <button
+                        (click)="goToPage(currentPage - 1)"
+                        [disabled]="currentPage === 1"
+                        class="inline-flex items-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm transition hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-white/[0.03]"
+                    >
+                        <svg class="fill-current" width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M2.58301 9.99868C2.58272 10.1909 2.65588 10.3833 2.80249 10.53L7.79915 15.5301C8.09194 15.8231 8.56682 15.8233 8.85981 15.5305C9.15281 15.2377 9.15297 14.7629 8.86018 14.4699L5.14009 10.7472L16.6675 10.7472C17.0817 10.7472 17.4175 10.4114 17.4175 9.99715C17.4175 9.58294 17.0817 9.24715 16.6675 9.24715L5.14554 9.24715L8.86017 5.53016C9.15297 5.23717 9.15282 4.7623 8.85983 4.4695C8.56684 4.1767 8.09197 4.17685 7.79917 4.46984L2.84167 9.43049C2.68321 9.568 2.58301 9.77087 2.58301 9.99715C2.58301 9.99766 2.58301 9.99817 2.58301 9.99868Z" fill=""/>
+                        </svg>
+                        <span class="hidden sm:inline">Anterior</span>
+                    </button>
+
+                    <!-- Página actual (móvil) -->
+                    <span class="block text-sm font-medium text-gray-700 dark:text-gray-400 sm:hidden">
+                        Página {{ currentPage }} de {{ totalPages }}
+                    </span>
+
+                    <!-- Números de página (desktop) -->
+                    <ul class="hidden items-center gap-0.5 sm:flex">
+                        @for (page of pagesArray; track page) {
+                            <li>
+                                <button
+                                    (click)="goToPage(page)"
+                                    class="flex h-10 w-10 items-center justify-center rounded-lg text-sm font-medium transition"
+                                    [class.bg-brand-500]="currentPage === page"
+                                    [class.text-white]="currentPage === page"
+                                    [class.text-gray-700]="currentPage !== page"
+                                    [class.hover:bg-brand-500]="currentPage !== page"
+                                    [class.dark:text-gray-400]="currentPage !== page"
+                                >
+                                    {{ page }}
+                                </button>
+                            </li>
+                        }
+                    </ul>
+
+                    <!-- Botón Siguiente -->
+                    <button
+                        (click)="goToPage(currentPage + 1)"
+                        [disabled]="currentPage === totalPages"
+                        class="inline-flex items-center gap-2 rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm transition hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-white/[0.03]"
+                    >
+                        <span class="hidden sm:inline">Siguiente</span>
+                        <svg class="fill-current" width="16" height="16" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd" d="M17.4175 9.9986C17.4178 10.1909 17.3446 10.3832 17.198 10.53L12.2013 15.5301C11.9085 15.8231 11.4337 15.8233 11.1407 15.5305C10.8477 15.2377 10.8475 14.7629 11.1403 14.4699L14.8604 10.7472L3.33301 10.7472C2.91879 10.7472 2.58301 10.4114 2.58301 9.99715C2.58301 9.58294 2.91879 9.24715 3.33301 9.24715L14.8549 9.24715L11.1403 5.53016C10.8475 5.23717 10.8477 4.7623 11.1407 4.4695C11.4336 4.1767 11.9085 4.17685 12.2013 4.46984L17.1588 9.43049C17.3173 9.568 17.4175 9.77087 17.4175 9.99715C17.4175 9.99763 17.4175 9.99812 17.4175 9.9986Z" fill=""/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
 
             @if (!loading && !error && dataSource.data.length === 0) {
                 <div class="px-5 py-6 text-center text-sm text-gray-500 dark:text-gray-400">
