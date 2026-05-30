@@ -27,6 +27,10 @@ git clone <ruta-del-repositorio>
 cd angular-dashboard
 ```
 
+**Iniciar con Docker**
+
+- Para iniciar con Docker revisar la documentación en DOCKER.md
+
 **Instalar dependencias**
 - Usando `pnpm` (recomendado):
 ```bash
