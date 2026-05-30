@@ -16,10 +16,10 @@
   (mouseleave)="sidebarService.setHovered(false)"
 >
   <div
-    class="py-8 flex"
+    class="py-5 lg:py-8 flex"
     [ngClass]="{
       'xl:justify-center': !((isExpanded$ | async) || (isHovered$ | async)),
-      'justify-start': (isExpanded$ | async) || (isHovered$ | async)
+      'justify-center': (isExpanded$ | async) || (isHovered$ | async)
     }"
   >
     <a routerLink="/">
