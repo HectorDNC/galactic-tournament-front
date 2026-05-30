@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { BattleRoutingModule } from './battle-routing.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BattleComponent } from './pages/battle/battle.component';
+import { ModalComponent } from '../../shared/components/ui/modal/modal.component';
+import { ConfirmComponent } from '../../shared/components/ui/confirm/confirm.component';
 
 @NgModule({
   declarations: [BattleComponent],
@@ -11,6 +13,8 @@ import { BattleComponent } from './pages/battle/battle.component';
     BattleRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+    ModalComponent,
+    ConfirmComponent,
   ],
   exports: [BattleRoutingModule]
 })

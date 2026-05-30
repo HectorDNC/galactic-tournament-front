@@ -1,6 +1,20 @@
-# Instrucciones para ejecutar el proyecto
+# Galactic Tournament - Frontend
 
-Este repositorio contiene undashboard construido con Angular y Tailwind. A continuación tienes instrucciones claras y concisas para ejecutar el proyecto en desarrollo, construir una versión de producción y solucionar problemas comunes.
+## Descripción del Sistema
+
+**Galactic Tournament** es una aplicación web moderna que gestiona un torneo intergaláctico donde diferentes especies compiten por la supremacía. El sistema permite:
+
+- **Gestión de Especies:** Crear, editar y visualizar especies con atributos como nivel de poder y habilidades especiales.
+- **Sistema de Combates:** Registrar y gestionar batallas entre especies.
+- **Estadísticas y Rankings:** Ver el ranking de especies ordenadas por cantidad de victorias.
+
+Este repositorio contiene el frontend del dashboard construido con Angular, Tailwind CSS y Angular Material. 
+
+---
+
+## Instrucciones para ejecutar el proyecto
+
+A continuación tienes instrucciones claras y concisas para ejecutar el proyecto en desarrollo, construir una versión de producción y solucionar problemas comunes.
 
 **Requisitos previos**
 - **Node.js:** versión 20.x o superior (recomendado).
@@ -12,6 +26,10 @@ Este repositorio contiene undashboard construido con Angular y Tailwind. A conti
 git clone <ruta-del-repositorio>
 cd angular-dashboard
 ```
+
+**Iniciar con Docker**
+
+- Para iniciar con Docker revisar la documentación en DOCKER.md
 
 **Instalar dependencias**
 - Usando `pnpm` (recomendado):
@@ -74,11 +92,6 @@ ng serve --port 4201
 - Si ves warnings de Angular relacionados con versiones, asegúrate de usar Node.js 20+ y actualizar dependencias si fuera necesario.
 
 **Notas**
-- Este README ha sido simplificado para centrar las instrucciones de ejecución. Para más información sobre la plantilla, diseño o archivos de ejemplo revisa la documentación del proyecto o los comentarios en el código.
+- Este README contiene las instrucciones esenciales para ejecutar el proyecto. Para más información sobre características específicas o troubleshooting avanzado, consulta la documentación del proyecto.
 
-Si quieres, puedo:
-- Ejecutar los comandos de instalación en tu máquina (necesito que confirmes).
-- Abrir y revisar `package.json` para ajustar las instrucciones exactas de los scripts (recomendado para precisión).
-
----
-Archivo modificado: `README.md`
+**Última actualización**: Junio 2026

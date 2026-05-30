@@ -46,7 +46,7 @@ export class SpeciesComponent implements OnInit, AfterViewInit {
     this.speciesService.findAll(this.currentPage - 1, this.pageSize).subscribe({
       next: (data) => {
         this.dataSource.data = data.content;
-        this.totalPages = data.totalPages;
+        this.totalPages = data.page.totalPages;
         this.loading = false;
       },
       error: () => {
