@@ -18,6 +18,8 @@ export class SpeciesFormComponent implements OnChanges, OnDestroy {
   loading = false;
   saving = false;
   error: string | null = null;
+  showConfirm = false;
+  private pendingPayload: any | null = null;
 
   constructor(private fb: FormBuilder, private speciesService: SpeciesService) {
     this.form = this.fb.group({
@@ -90,9 +92,13 @@ export class SpeciesFormComponent implements OnChanges, OnDestroy {
     this.saving = true;
     this.error = null;
 
-    const request$ = this.isEditMode
-      ? this.speciesService.update(this.speciesId!, payload)
-      : this.speciesService.create(payload);
+    if (this.isEditMode) {
+      this.pendingPayload = payload;
+      this.showConfirm = true;
+      return;
+    }
+
+    const request$ = this.speciesService.create(payload);
 
     request$.subscribe({
       next: () => {
@@ -101,12 +107,36 @@ export class SpeciesFormComponent implements OnChanges, OnDestroy {
         this.close.emit();
       },
       error: () => {
-        this.error = this.isEditMode
-          ? 'Error al actualizar la especie.'
-          : 'Error al crear la especie.';
+        this.error = 'Error al crear la especie.';
         this.saving = false;
       },
     });
+  }
+
+  onConfirmSave(): void {
+    if (!this.pendingPayload) return;
+    this.showConfirm = false;
+    this.saving = true;
+    this.error = null;
+    const request$ = this.speciesService.update(this.speciesId!, this.pendingPayload);
+    this.pendingPayload = null;
+    request$.subscribe({
+      next: () => {
+        this.saving = false;
+        this.saved.emit();
+        this.close.emit();
+      },
+      error: () => {
+        this.error = 'Error al actualizar la especie.';
+        this.saving = false;
+      }
+    });
+  }
+
+  onCancelConfirm(): void {
+    this.showConfirm = false;
+    this.pendingPayload = null;
+    this.saving = false;
   }
 
   onClose(): void {

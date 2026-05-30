@@ -10,6 +10,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { ModalComponent } from '../../shared/components/ui/modal/modal.component';
 import { InputFieldComponent } from '../../shared/components/form/input/input-field.component';
 import { LabelComponent } from '../../shared/components/form/label/label.component';
+import { ConfirmComponent } from '../../shared/components/ui/confirm/confirm.component';
 
 @NgModule({
   declarations: [SpeciesComponent, SpeciesFormComponent],
@@ -23,6 +24,7 @@ import { LabelComponent } from '../../shared/components/form/label/label.compone
     ModalComponent,
     InputFieldComponent,
     LabelComponent,
+    ConfirmComponent,
   ],
   exports: [SpeciesRoutingModule]
 })

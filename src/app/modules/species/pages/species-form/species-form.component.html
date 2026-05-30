@@ -121,3 +121,12 @@
         }
     </div>
 </app-modal>
+<app-confirm
+    [isOpen]="showConfirm"
+    title="Confirmar cambios"
+    message="¿Confirma que desea guardar los cambios en esta especie?"
+    confirmText="Guardar"
+    cancelText="Cancelar"
+    (confirm)="onConfirmSave()"
+    (cancel)="onCancelConfirm()"
+></app-confirm>
