@@ -19,6 +19,12 @@ export const routes: Routes = [
         loadChildren: () =>
           import('./modules/species/species.module').then((m) => m.SpeciesModule),
         title: 'Gestión de Especies',
+      },
+      {
+        path: 'battles',
+        loadChildren: () =>
+          import('./modules/battle/battle.module').then((m) => m.BattleModule),
+        title: 'Combates',
       }
     ]
   },

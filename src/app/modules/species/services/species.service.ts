@@ -17,8 +17,11 @@ export class SpeciesService {
     return this.http.get<Specie[]>(`${this.url}/all`);
   }
 
-  findAll(page: number = 0, size: number = 10): Observable<Page<Specie>> {
-    const params = `?page=${page}&size=${size}`;
+  findAll(page: number = 0, size: number = 10, name?: string): Observable<Page<Specie>> {
+    let params = `?page=${page}&size=${size}`;
+    if (name) {
+      params += `&name=${name}`;
+    }
     return this.http.get<Page<Specie>>(`${this.url}${params}`);
   }
 
