@@ -19,8 +19,7 @@ type NavItem = {
   imports: [
     CommonModule,
     RouterModule,
-    SafeHtmlPipe,
-    SidebarWidgetComponent
+    SafeHtmlPipe
   ],
   templateUrl: './app-sidebar.component.html',
 })
