@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { SpeciesService } from '../../services/species.service';
+import { AlertService } from '../../../../shared/services/alert.service';
 
 @Component({
   selector: 'app-species-form',
@@ -21,7 +22,9 @@ export class SpeciesFormComponent implements OnChanges, OnDestroy {
   showConfirm = false;
   private pendingPayload: any | null = null;
 
-  constructor(private fb: FormBuilder, private speciesService: SpeciesService) {
+  constructor(private fb: FormBuilder, private _speciesService: SpeciesService,
+      private _alertService: AlertService
+  ) {
     this.form = this.fb.group({
       name: ['', [Validators.required, Validators.maxLength(100)]],
       powerLevel: [null, [Validators.required, Validators.min(1), Validators.pattern(/^\d+$/)]],
@@ -61,7 +64,7 @@ export class SpeciesFormComponent implements OnChanges, OnDestroy {
 
   private loadSpecies(): void {
     this.loading = true;
-    this.speciesService.findById(this.speciesId!).subscribe({
+    this._speciesService.findById(this.speciesId!).subscribe({
       next: (specie) => {
         this.form.patchValue({
           name: specie.name,
@@ -71,7 +74,7 @@ export class SpeciesFormComponent implements OnChanges, OnDestroy {
         this.loading = false;
       },
       error: () => {
-        this.error = 'Error al cargar la especie.';
+        this._alertService.error('Error al cargar especie');
         this.loading = false;
       },
     });
@@ -98,16 +101,17 @@ export class SpeciesFormComponent implements OnChanges, OnDestroy {
       return;
     }
 
-    const request$ = this.speciesService.create(payload);
+    const request$ = this._speciesService.create(payload);
 
     request$.subscribe({
       next: () => {
         this.saving = false;
         this.saved.emit();
         this.close.emit();
+        this._alertService.success('Especie creada exitosamente');
       },
       error: () => {
-        this.error = 'Error al crear la especie.';
+        this._alertService.error('Error al crear especie');
         this.saving = false;
       },
     });
@@ -118,16 +122,17 @@ export class SpeciesFormComponent implements OnChanges, OnDestroy {
     this.showConfirm = false;
     this.saving = true;
     this.error = null;
-    const request$ = this.speciesService.update(this.speciesId!, this.pendingPayload);
+    const request$ = this._speciesService.update(this.speciesId!, this.pendingPayload);
     this.pendingPayload = null;
     request$.subscribe({
       next: () => {
         this.saving = false;
         this.saved.emit();
         this.close.emit();
+        this._alertService.success('Especie actualizada exitosamente');
       },
       error: () => {
-        this.error = 'Error al actualizar la especie.';
+        this._alertService.error('Error al actualizar especie');
         this.saving = false;
       }
     });

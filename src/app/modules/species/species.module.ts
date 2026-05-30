@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { SpeciesRoutingModule } from './species-rounting.module';
 import { SpeciesComponent } from './pages/species/species.component';
-import { SpeciesFormComponent } from './pages/species-form/species-form.component';
+import { SpeciesFormComponent } from './components/species-form/species-form.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTableModule } from '@angular/material/table';
 import { MatSortModule } from '@angular/material/sort';
