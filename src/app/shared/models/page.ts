@@ -1,7 +1,11 @@
-export interface Page<T> {
-    content: T[];
+export interface PageInfo {
+    size: number;
+    number: number; // current page (0-based)
     totalElements: number;
     totalPages: number;
-    number: number; // current page (0-based)
-    size: number; // page size
+}
+
+export interface Page<T> {
+    content: T[];
+    page: PageInfo;
 }

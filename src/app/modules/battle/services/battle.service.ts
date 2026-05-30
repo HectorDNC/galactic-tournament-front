@@ -15,4 +15,8 @@ export class BattleService {
   start(request: BattleRequest): Observable<BattleResult> {
     return this.http.post<BattleResult>(`${this.url}`, request);
   }
+
+  randomBattle(): Observable<BattleResult> {
+    return this.http.post<BattleResult>(`${this.url}/random`, {});
+  }
 }

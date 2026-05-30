@@ -28,8 +28,10 @@ export class BattleComponent implements OnInit {
 
   // Battle state
   fighting = false;
+  fightingRandom = false;
   result: BattleResult | null = null;
   error: string | null = null;
+  showRandomConfirm = false;
 
   constructor(
     private _speciesService: SpeciesService,
@@ -143,6 +145,42 @@ export class BattleComponent implements OnInit {
     this.rightSearch = '';
     this.result = null;
     this.error = null;
+  }
+
+  // Abre modal de confirmación
+  generateRandomBattle(): void {
+    this.showRandomConfirm = true;
+  }
+
+  // Ejecuta la petición al backend para generar combate aleatorio
+  performRandomBattle(): void {
+    this.showRandomConfirm = false;
+    this.fighting = true;
+    this.fightingRandom = true;
+    this.result = null;
+    this.error = null;
+    this.clearLeft();
+    this.clearRight();
+
+    this._battleService.randomBattle().subscribe({
+      next: (res) => {
+        this.selectFighterLeft(res.fighterLeft);
+        this.selectFighterRight(res.fighterRight);
+        this.result = res;
+        this.fighting = false;
+        this.fightingRandom = false;
+        this._alertService.success(`Batalla aleatoria realizada! Ganador: ${res.winner.name}`);
+      },
+      error: (error) => {
+        this.fighting = false;
+        this.fightingRandom = false;  
+        this._alertService.error('Error al generar la batalla aleatoria');
+      },
+    });
+  }
+
+  cancelRandomBattle(): void {
+    this.showRandomConfirm = false;
   }
 
   // Cerrar dropdowns al hacer click fuera

@@ -2,8 +2,8 @@ import { Specie } from '../../species/models/specie';
 
 export interface BattleResult {
   id: number;
-  leftFighter: Specie;
-  rightFighter: Specie;
+  fighterLeft: Specie;
+  fighterRight: Specie;
   winner: Specie;
   battleDate: Date;
 }

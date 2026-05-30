@@ -184,7 +184,7 @@
     </div>
 
     <!-- Action Buttons -->
-    <div class="mt-8 flex flex-col items-center gap-3">
+    <div class="mt-10 flex flex-col items-center gap-4">
       <button
         (click)="startBattle()"
         [disabled]="!canFight"
@@ -196,7 +196,6 @@
         </svg>
         <span>{{ fighting ? 'Combatiendo...' : '⚔️ ¡Iniciar Combate!' }}</span>
       </button>
-
       <button
         *ngIf="result"
         (click)="resetBattle()"
@@ -205,6 +204,16 @@
         Nuevo combate
       </button>
     </div>
+    
+      <app-confirm
+        [isOpen]="showRandomConfirm"
+        title="Generar combate aleatorio"
+        message="Se generará un combate entre dos especies aleatorias. ¿Deseas continuar?"
+        confirmText="Generar"
+        cancelText="Cancelar"
+        (confirm)="performRandomBattle()"
+        (cancel)="cancelRandomBattle()"
+      ></app-confirm>
 
     <!-- Result Banner -->
     <div *ngIf="result" class="mt-8 rounded-xl border border-yellow-300 bg-gradient-to-r from-yellow-50 to-amber-50 p-6 text-center dark:border-yellow-700/50 dark:from-yellow-900/20 dark:to-amber-900/20">
@@ -221,5 +230,19 @@
     <p *ngIf="loadingSpecies" class="mt-4 text-center text-sm text-gray-400 dark:text-gray-500">
       Cargando especies...
     </p>
+  </div>
+  <div class="mt-2 flex justify-end">
+    <button
+      (click)="generateRandomBattle()"
+      [disabled]="fighting"
+      class="inline-flex items-center gap-2 rounded-xl bg-purple-500 px-8 py-3 text-sm font-bold text-white shadow-lg transition hover:bg-purple-600 disabled:cursor-not-allowed disabled:opacity-40 mt-3"
+      style="margin-top:8px"
+    >
+      <svg *ngIf="fightingRandom" class="h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none">
+        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
+        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/>
+      </svg>
+      <span>{{ fightingRandom ? 'Generando...' : '🎲 Combate Aleatorio' }}</span>
+    </button>
   </div>
 </div>
