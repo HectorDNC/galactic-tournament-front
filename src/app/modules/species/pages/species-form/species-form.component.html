@@ -1,0 +1,123 @@
+<app-modal [isOpen]="isOpen" (close)="onClose()" className="max-w-lg mx-4">
+    <div class="px-6 py-6 sm:px-8 sm:py-8">
+        <!-- Header -->
+        <div class="mb-6">
+            <h4 class="text-lg font-semibold text-gray-800 dark:text-white/90">
+                {{ isEditMode ? 'Editar Especie' : 'Nueva Especie' }}
+            </h4>
+            <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+                {{ isEditMode ? 'Modifica los datos de la especie.' : 'Completa los datos para registrar una nueva especie.' }}
+            </p>
+        </div>
+
+        <!-- Loader de consulta -->
+        @if (loading) {
+            <div class="flex items-center justify-center py-10">
+                <div class="h-8 w-8 animate-spin rounded-full border-4 border-brand-500 border-t-transparent"></div>
+            </div>
+        } @else {
+            <!-- Error general -->
+            @if (error) {
+                <div class="mb-4 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-600 dark:border-red-800 dark:bg-red-900/20 dark:text-red-400">
+                    {{ error }}
+                </div>
+            }
+
+            <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+                <div class="space-y-5">
+
+                    <!-- Nombre -->
+                    <div>
+                        <app-label for="name" className="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-300">
+                            Nombre <span class="text-red-500">*</span>
+                        </app-label>
+                        <app-input-field
+                            id="name"
+                            name="name"
+                            type="text"
+                            placeholder="Ej. Sayajin"
+                            [value]="nameControl.value ?? ''"
+                            [error]="nameControl.invalid && nameControl.touched"
+                            (valueChange)="nameControl.setValue($event); nameControl.markAsTouched()"
+                        />
+                        @if (nameControl.touched && nameControl.hasError('required')) {
+                            <p class="mt-1 text-xs text-red-500">El nombre es obligatorio.</p>
+                        }
+                        @if (nameControl.touched && nameControl.hasError('maxlength')) {
+                            <p class="mt-1 text-xs text-red-500">Máximo 100 caracteres.</p>
+                        }
+                    </div>
+
+                    <!-- Nivel de Poder -->
+                    <div>
+                        <app-label for="powerLevel" className="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-300">
+                            Nivel de Poder <span class="text-red-500">*</span>
+                        </app-label>
+                        <app-input-field
+                            id="powerLevel"
+                            name="powerLevel"
+                            type="number"
+                            placeholder="Ej. 9000"
+                            [value]="powerLevelControl.value ?? ''"
+                            [error]="powerLevelControl.invalid && powerLevelControl.touched"
+                            (valueChange)="powerLevelControl.setValue($event); powerLevelControl.markAsTouched()"
+                        />
+                        @if (powerLevelControl.touched && powerLevelControl.hasError('required')) {
+                            <p class="mt-1 text-xs text-red-500">El nivel de poder es obligatorio.</p>
+                        }
+                        @if (powerLevelControl.touched && powerLevelControl.hasError('min')) {
+                            <p class="mt-1 text-xs text-red-500">El nivel de poder debe ser mayor a 0.</p>
+                        }
+                        @if (powerLevelControl.touched && powerLevelControl.hasError('pattern')) {
+                            <p class="mt-1 text-xs text-red-500">Debe ser un número entero positivo.</p>
+                        }
+                    </div>
+
+                    <!-- Habilidad Especial -->
+                    <div>
+                        <app-label for="specialAbility" className="mb-1.5 block text-sm font-medium text-gray-700 dark:text-gray-300">
+                            Habilidad Especial <span class="text-red-500">*</span>
+                        </app-label>
+                        <app-input-field
+                            id="specialAbility"
+                            name="specialAbility"
+                            type="text"
+                            placeholder="Ej. Transformación Super Sayajin"
+                            [value]="specialAbilityControl.value ?? ''"
+                            [error]="specialAbilityControl.invalid && specialAbilityControl.touched"
+                            (valueChange)="specialAbilityControl.setValue($event); specialAbilityControl.markAsTouched()"
+                        />
+                        @if (specialAbilityControl.touched && specialAbilityControl.hasError('required')) {
+                            <p class="mt-1 text-xs text-red-500">La habilidad especial es obligatoria.</p>
+                        }
+                        @if (specialAbilityControl.touched && specialAbilityControl.hasError('maxlength')) {
+                            <p class="mt-1 text-xs text-red-500">Máximo 200 caracteres.</p>
+                        }
+                    </div>
+
+                </div>
+
+                <!-- Botones -->
+                <div class="mt-7 flex items-center justify-end gap-3">
+                    <button
+                        type="button"
+                        (click)="onClose()"
+                        class="rounded-lg border border-gray-300 bg-white px-4 py-2.5 text-sm font-medium text-gray-700 transition hover:bg-gray-50 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-white/[0.03]"
+                    >
+                        Cancelar
+                    </button>
+                    <button
+                        type="submit"
+                        [disabled]="saving"
+                        class="inline-flex items-center gap-2 rounded-lg bg-brand-500 px-4 py-2.5 text-sm font-medium text-white transition hover:bg-brand-600 disabled:cursor-not-allowed disabled:opacity-60"
+                    >
+                        @if (saving) {
+                            <span class="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></span>
+                        }
+                        {{ isEditMode ? 'Guardar cambios' : 'Crear especie' }}
+                    </button>
+                </div>
+            </form>
+        }
+    </div>
+</app-modal>

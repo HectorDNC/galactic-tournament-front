@@ -11,7 +11,7 @@ import { SpeciesService } from '../../services/species.service';
   styleUrls: ['./species.component.css'],
 })
 export class SpeciesComponent implements OnInit, AfterViewInit {
-  displayedColumns: string[] = ['name', 'powerLevel', 'specialAbility', 'createdAt'];
+  displayedColumns: string[] = ['name', 'powerLevel', 'specialAbility', 'createdAt', 'actions'];
   dataSource = new MatTableDataSource<Specie>([]);
 
   totalPages = 1;
@@ -19,6 +19,9 @@ export class SpeciesComponent implements OnInit, AfterViewInit {
   pageSize = 10;
   loading = false;
   error: string | null = null;
+
+  isModalOpen = false;
+  selectedSpeciesId?: number;
 
   @ViewChild('tbSort') tbSort!: MatSort;
 
@@ -56,6 +59,25 @@ export class SpeciesComponent implements OnInit, AfterViewInit {
   goToPage(page: number): void {
     if (page < 1 || page > this.totalPages) return;
     this.currentPage = page;
+    this.loadSpecies();
+  }
+
+  openCreateModal(): void {
+    this.selectedSpeciesId = undefined;
+    this.isModalOpen = true;
+  }
+
+  openEditModal(id: number): void {
+    this.selectedSpeciesId = id;
+    this.isModalOpen = true;
+  }
+
+  closeModal(): void {
+    this.isModalOpen = false;
+  }
+
+  onSpeciesSaved(): void {
+    this.currentPage = 1;
     this.loadSpecies();
   }
 }

@@ -21,4 +21,22 @@ export class SpeciesService {
     const params = `?page=${page}&size=${size}`;
     return this.http.get<Page<Specie>>(`${this.url}${params}`);
   }
+
+  findById(id: number): Observable<Specie> {
+    return this.http.get<Specie>(`${this.url}/${id}`);
+  }
+
+  create(data: SpecieRequest): Observable<Specie> {
+    return this.http.post<Specie>(this.url, data);
+  }
+
+  update(id: number, data: SpecieRequest): Observable<Specie> {
+    return this.http.put<Specie>(`${this.url}/${id}`, data);
+  }
+}
+
+export interface SpecieRequest {
+  name: string;
+  powerLevel: number;
+  specialAbility: string;
 }
