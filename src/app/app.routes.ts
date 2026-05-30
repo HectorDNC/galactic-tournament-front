@@ -12,8 +12,14 @@ export const routes: Routes = [
         component: EcommerceComponent,
         pathMatch: 'full',
         title:
-          'Angular Ecommerce Dashboard',
+          'Dashboard',
       },
+      {
+        path: 'species',
+        loadChildren: () =>
+          import('./modules/species/species.module').then((m) => m.SpeciesModule),
+        title: 'Gestión de Especies',
+      }
     ]
   },
 

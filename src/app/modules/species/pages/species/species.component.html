@@ -1,0 +1,60 @@
+<div class="space-y-6">
+    <div class="flex items-center justify-between">
+        <h2 class="text-xl font-semibold text-gray-800 dark:text-white/90">Especies</h2>
+    </div>
+
+    <div class="overflow-hidden rounded-xl border border-gray-200 bg-white dark:border-white/[0.05] dark:bg-white/[0.03]">
+        <div class="max-w-full overflow-x-auto">
+            <table
+                mat-table
+                [dataSource]="dataSource"
+                class="min-w-full"
+                matSort
+                #tbSort="matSort"
+            >
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="px-5 py-3 font-normal text-gray-500 text-start text-theme-sm dark:text-gray-400">Nombre</th>
+                    <td mat-cell *matCellDef="let element" class="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">{{ element.name }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="powerLevel">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="px-5 py-3 font-normal text-gray-500 text-start text-theme-sm dark:text-gray-400">Nivel de poder</th>
+                    <td mat-cell *matCellDef="let element" class="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">{{ element.powerLevel }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="specialAbility">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="px-5 py-3 font-normal text-gray-500 text-start text-theme-sm dark:text-gray-400">Habilidad especial</th>
+                    <td mat-cell *matCellDef="let element" class="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">{{ element.specialAbility }}</td>
+                </ng-container>
+
+                <ng-container matColumnDef="createdAt">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header class="px-5 py-3 font-normal text-gray-500 text-start text-theme-sm dark:text-gray-400">Fecha de creación</th>
+                    <td mat-cell *matCellDef="let element" class="px-4 py-3 text-gray-500 text-start text-theme-sm dark:text-gray-400">{{ element.createdAt | date: 'dd/MM/yyyy' }}</td>
+                </ng-container>
+
+                <!-- Row para estado de carga -->
+                <tr *ngIf="loading">
+                    <td [attr.colspan]="displayedColumns.length" class="px-5 py-6 text-center text-sm text-gray-500 dark:text-gray-400">
+                        Cargando especies...
+                    </td>
+                </tr>
+
+                <!-- Row para error -->
+                <tr *ngIf="!loading && error">
+                    <td [attr.colspan]="displayedColumns.length" class="px-5 py-6 text-center text-sm text-red-600">
+                        {{ error }}
+                    </td>
+                </tr>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns" class="border-b border-gray-100 dark:border-white/[0.05]"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns" class="border-b border-gray-100 dark:border-white/[0.05]"></tr>
+            </table>
+
+            @if (!loading && !error && dataSource.data.length === 0) {
+                <div class="px-5 py-6 text-center text-sm text-gray-500 dark:text-gray-400">
+                    No hay especies registradas.
+                </div>
+            }
+        </div>
+    </div>
+</div>
