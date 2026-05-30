@@ -1,4 +1,4 @@
 export const environment = {
-    production: false, // Cambia a true para producción
+    production: true,
     api_url: 'https://galactic-tournament-app-production.up.railway.app',
 };
