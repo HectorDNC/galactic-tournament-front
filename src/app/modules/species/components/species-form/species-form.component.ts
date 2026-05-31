@@ -101,17 +101,16 @@ export class SpeciesFormComponent implements OnChanges, OnDestroy {
       return;
     }
 
-    const request$ = this._speciesService.create(payload);
-
-    request$.subscribe({
+    this._speciesService.create(payload).subscribe({
       next: () => {
         this.saving = false;
         this.saved.emit();
         this.close.emit();
         this._alertService.success('Especie creada exitosamente');
       },
-      error: () => {
-        this._alertService.error('Error al crear especie');
+      error: (error) => {
+        console.error('Error creating species:', error);
+        this._alertService.error('Error al crear especie', 'Error', error);
         this.saving = false;
       },
     });
