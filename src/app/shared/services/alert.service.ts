@@ -16,7 +16,7 @@ export interface Alert {
 })
 export class AlertService {
 
-  private readonly DEFAULT_DURATION = 4000;
+  private readonly DEFAULT_DURATION = 5000;
 
   private alertsSubject = new BehaviorSubject<Alert[]>([]);
   alerts$: Observable<Alert[]> = this.alertsSubject.asObservable();
@@ -31,8 +31,9 @@ export class AlertService {
 
   error(message: string, title: string = 'Error', error: any = null, duration = this.DEFAULT_DURATION): void {
     let messageData = message;
-    if (error && error.message) {
-      messageData += `: ${error.message || error}`;
+    if (error != null && error.status 
+        && error.status >= 400 && error.status < 500 && error.error?.message) {
+      messageData += `: ${error.error.message || error}`;
     }
     this.addAlert('error', title, messageData, duration);
   }
