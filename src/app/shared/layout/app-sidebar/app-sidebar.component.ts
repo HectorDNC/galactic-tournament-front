@@ -35,12 +35,15 @@ export class AppSidebarComponent {
     {
       name: "Especies",
       path: "/species",
-      icon: `<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2ZM11.9999 4C16.4183 4.00001 19.9999 7.58163 19.9999 12C19.9999 16.4184 16.4183 20.0001 11.9999 20C7.58154 20.0001 3.99988 16.4184 3.99988 12C3.99988 7.58163 7.58154 4.00001 11.9999 4ZM10.0001 10C10.5523 10 11.0001 10.4477 11.0001 11V13C11.0001 13.5523 10.5523 14 10.0001 14C9.44787 14 -0.00012207e-05 13.5523 -0.00012207e-05 13V11C-0.00012207e-05 10.4477 -0.00012207e-05 10 -0.00012207e-05 10C-0.00012207e-05 9.44772 -0.00012207e-05 -5.96046e-08 -0.00012207e-05 -5.96046e-08C-0.00012207e-05 -6.51269e-08 -0.00012207e-05 -7.10543e-08 -0.00012207e-05 -7.65866e-08C-0.00012207e-05 -8.21189 -0.00012207e-05 -8.80463e-08 -0.00012207e-05 -9.35786e-08C-0.00012207e-05 -9.91109e-08 -0.00012207e-05 -1.05082e-07 -0.00012207e-05 -1.11035e-07C-0.00012207e-05 -1.16988e-07 -0.00012207e-05 -1.22941e-07 -0.00012207e-05 -1.28894e-07C-0.00012207e-05 -1.34847e-07 -0.00012207e-05 -1.408  -0.00012207e-05 -1.46753C-0.00012207e-05 -1.52706 9.44787 9.44772 10.0001 9.44772Z" fill="currentColor"></path></svg>`,
+      icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4.5 10.5C4.5 10.5 7 5 12 5s7.5 5.5 7.5 5.5" /><path d="M19.5 13.5C19.5 13.5 17 19 12 19s-7.5-5.5-7.5-5.5" /><circle cx="6" cy="6" r="1" fill="currentColor" /><circle cx="18" cy="6" r="1" fill="currentColor" /><circle cx="6" cy="18" r="1" fill="currentColor" /><circle cx="18" cy="18" r="1" fill="currentColor" /><line x1="8" y1="8" x2="16" y2="16" /><line x1="16" y1="8" x2="8" y2="16" /></svg>`,
     },
     {
       name: "Combates",
       path: "/battles",
-      icon: `<svg width="1em" height="1em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M14.5 2L20 7.5L7.5 20H2V14.5L14.5 2Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 5L19 8" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M2 14.5L9.5 7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>`,
+      icon: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <!-- Espada 1 (Diagonal principal) --><line x1="21" y1="3" x2="10" y2="14" /><line x1="13" y1="11" x2="11" y2="13" /><line x1="7" y1="17" x2="3" y2="21" /><line x1="5" y1="16" x2="8" y2="19" />
+              <!-- Espada 2 (Diagonal inversa) --><line x1="3" y1="3" x2="14" y2="14" /><line x1="11" y1="11" x2="13" y2="13" /><line x1="17" y1="17" x2="21" y2="21" /><line x1="19" y1="16" x2="16" y2="19" /></svg>`,
     },
     {
       name: "Ranking",
